@@ -51,7 +51,9 @@ export class SubsetManager {
         const isDefMaterial = this.isDefaultMat(config);
         const geometry = this.getMergedGeometry(geomsByMaterial, isDefMaterial);
         const mats = isDefMaterial ? materials : config.material;
-        this.BVH.applyThreeMeshBVH(geometry);
+        if (geometry.hasAttribute('position')) {
+            this.BVH.applyThreeMeshBVH(geometry);
+        }
         //@ts-ignore
         const mesh = new Mesh(geometry, mats);
         this.selected[this.matID(config)].mesh = mesh;
