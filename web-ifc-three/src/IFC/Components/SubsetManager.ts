@@ -111,6 +111,7 @@ export class SubsetManager {
 
     private isPreviousSelection(config: HighlightConfigOfModel) {
         if (!this.selected[this.matID(config)]) return false;
+        if (config.removePrevious) return false;
         if (this.containsIds(config)) return true;
         const previousIds = this.selected[this.matID(config)].ids;
         return JSON.stringify(config.ids) === JSON.stringify(previousIds);
